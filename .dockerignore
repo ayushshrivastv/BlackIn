@@ -1,0 +1,16 @@
+.git
+.gitignore
+node_modules
+**/node_modules
+.next
+**/.next
+dist
+**/dist
+build
+**/.turbo
+coverage
+.nyc_output
+.DS_Store
+.env
+.env.local
+.env.*.local

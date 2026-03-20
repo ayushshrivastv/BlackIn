@@ -1,0 +1,41 @@
+# Dependencies
+node_modules
+**/node_modules
+
+# Build output
+.next
+out
+dist
+build
+.turbo
+coverage
+.nyc_output
+*.tsbuildinfo
+next-env.d.ts
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# OS / editor
+.DS_Store
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# Legacy / generated challenge artifacts
+.mastra
+memory.*
+
+# Local server runtime (ephemeral object store)
+apps/server/.runtime/
