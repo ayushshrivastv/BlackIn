@@ -1,37 +1,93 @@
 # syntax=docker/dockerfile:1
 
-FROM node:23-slim AS base
+FROM node:20-bookworm-slim AS base
 
-# Install system dependencies needed for native modules (e.g. better-sqlite3)
 RUN apt-get update && apt-get install -y \
+  ca-certificates \
+  git \
+  g++ \
+  openssl \
   python3 \
   make \
-  g++ \
-  git \
   && rm -rf /var/lib/apt/lists/*
 
-# Disable telemetry
-ENV ELIZAOS_TELEMETRY_DISABLED=true
-ENV DO_NOT_TRACK=1
+RUN corepack enable && corepack prepare pnpm@9.0.0 --activate
 
 WORKDIR /app
 
-# Install pnpm
-RUN npm install -g pnpm
+FROM base AS workspace
 
-# Copy package manifest and install dependencies
-COPY package.json ./
-RUN pnpm install
+ENV NEXT_TELEMETRY_DISABLED=1
 
-# Copy all source files
 COPY . .
 
-# Create data directory for SQLite
-RUN mkdir -p /app/data
+RUN pnpm install --no-frozen-lockfile
+
+FROM workspace AS prisma
+
+RUN pnpm --filter @lighthouse/database generate
+
+FROM prisma AS server
+
+ENV NODE_ENV=production
+
+RUN pnpm --filter server build
+
+EXPOSE 8787
+
+CMD ["pnpm", "--filter", "server", "start"]
+
+FROM prisma AS socket
+
+ENV NODE_ENV=production
+
+RUN pnpm --filter socket build
+
+EXPOSE 8282
+
+CMD ["pnpm", "--filter", "socket", "start"]
+
+FROM workspace AS web
+
+ARG NEXT_PUBLIC_BACKEND_URL=http://localhost:8787
+ARG NEXT_PUBLIC_SOCKET_URL=ws://localhost:8282
+ARG INTERNAL_BACKEND_URL=http://server:8787
+ARG NEXT_PUBLIC_DEV_ACCESS_MODE=true
+ARG NEXT_PUBLIC_SKIP_AUTH=
+ARG NEXT_PUBLIC_SKIP_TEMPLATES_FETCH=
+ARG NEXT_PUBLIC_DEPLOY_PLACEHOLDER_MODE=true
+ARG NEXT_PUBLIC_CHAIN_BASE_ENABLED=true
+ARG NEXT_PUBLIC_BASE_SEPOLIA_RPC_URL=https://sepolia.base.org
+ARG NEXT_PUBLIC_BASE_MAINNET_RPC_URL=https://mainnet.base.org
+ARG NEXT_PUBLIC_ONCHAINKIT_API_KEY=
+ARG NEXT_PUBLIC_DISABLE_PRIVY=false
+ARG NEXT_PUBLIC_PRIVY_APP_ID=
+ARG NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=
+ARG NEXT_PUBLIC_RAZORPAY_KEY_ID=
+ARG NEXT_PUBLIC_ENABLE_CAPTCHA=false
+ARG NEXT_PUBLIC_TURNSTILE_SITE_KEY=
+
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_PUBLIC_BACKEND_URL=${NEXT_PUBLIC_BACKEND_URL}
+ENV NEXT_PUBLIC_SOCKET_URL=${NEXT_PUBLIC_SOCKET_URL}
+ENV INTERNAL_BACKEND_URL=${INTERNAL_BACKEND_URL}
+ENV NEXT_PUBLIC_DEV_ACCESS_MODE=${NEXT_PUBLIC_DEV_ACCESS_MODE}
+ENV NEXT_PUBLIC_SKIP_AUTH=${NEXT_PUBLIC_SKIP_AUTH}
+ENV NEXT_PUBLIC_SKIP_TEMPLATES_FETCH=${NEXT_PUBLIC_SKIP_TEMPLATES_FETCH}
+ENV NEXT_PUBLIC_DEPLOY_PLACEHOLDER_MODE=${NEXT_PUBLIC_DEPLOY_PLACEHOLDER_MODE}
+ENV NEXT_PUBLIC_CHAIN_BASE_ENABLED=${NEXT_PUBLIC_CHAIN_BASE_ENABLED}
+ENV NEXT_PUBLIC_BASE_SEPOLIA_RPC_URL=${NEXT_PUBLIC_BASE_SEPOLIA_RPC_URL}
+ENV NEXT_PUBLIC_BASE_MAINNET_RPC_URL=${NEXT_PUBLIC_BASE_MAINNET_RPC_URL}
+ENV NEXT_PUBLIC_ONCHAINKIT_API_KEY=${NEXT_PUBLIC_ONCHAINKIT_API_KEY}
+ENV NEXT_PUBLIC_DISABLE_PRIVY=${NEXT_PUBLIC_DISABLE_PRIVY}
+ENV NEXT_PUBLIC_PRIVY_APP_ID=${NEXT_PUBLIC_PRIVY_APP_ID}
+ENV NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=${NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID}
+ENV NEXT_PUBLIC_RAZORPAY_KEY_ID=${NEXT_PUBLIC_RAZORPAY_KEY_ID}
+ENV NEXT_PUBLIC_ENABLE_CAPTCHA=${NEXT_PUBLIC_ENABLE_CAPTCHA}
+ENV NEXT_PUBLIC_TURNSTILE_SITE_KEY=${NEXT_PUBLIC_TURNSTILE_SITE_KEY}
+
+RUN pnpm --filter web build
 
 EXPOSE 3000
 
-ENV NODE_ENV=production
-ENV SERVER_PORT=3000
-
-CMD ["pnpm", "start"]
+CMD ["pnpm", "--filter", "web", "start"]
