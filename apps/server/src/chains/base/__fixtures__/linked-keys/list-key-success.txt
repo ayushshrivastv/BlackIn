@@ -1,0 +1,15 @@
+Workflow owners retrieved successfully:
+
+Linked Owners:
+
+  1. JohnProd
+     Owner Address:     0x1111111111111111111111111111111111111111
+     Status:            VERIFICATION_STATUS_SUCCESSFULL
+     Verified At:       2025-10-21T17:22:24.394249Z
+     Chain Selector:    5009297550715157269
+     Contract Address:  0x4Ac54353FA4Fa961AfcC5ec4B118596d3305E7e5
+
+  2. JaneProd
+     Owner Address:     0x2222222222222222222222222222222222222222
+     Status:            VERIFICATION_STATUS_PENDING
+     Verified At:       2025-10-21T17:22:24.394249Z
