@@ -1,0 +1,2 @@
+Deployment access is enabled for your organization.
+You can deploy workflows with `cre workflow deploy`.
