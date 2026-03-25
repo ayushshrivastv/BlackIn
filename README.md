@@ -69,7 +69,6 @@ There are no strict requirements on use case — build whatever is most useful t
 # Fork this repo, then clone your fork
 git clone https://github.com/YOUR-USERNAME/agent-challenge
 cd agent-challenge
-git checkout elizaos-challenge
 
 # Copy and configure environment variables
 cp .env.example .env
@@ -288,7 +287,6 @@ For developers who prefer the command line or want to automate deployments:
 ```bash
 # Install the Nosana CLI globally
 npm install -g @nosana/cli
-
 
 # Deploy your agent
 nosana job post \
