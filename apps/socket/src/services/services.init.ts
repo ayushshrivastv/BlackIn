@@ -1,0 +1,25 @@
+/*
+ * Lighthouse
+ * © 2026 ayushshrivastv
+ */
+
+import RedisPubSub from '../queue/redis.subscriber';
+import SocketToOrchestratorQueue from '../queue/redis.socket.queue';
+import WebSocketServer from '../ws/socket.server';
+
+export let wsserver: WebSocketServer;
+export let redis_pubsub: RedisPubSub;
+export let socket_orchestrator_queue: SocketToOrchestratorQueue;
+export let cre_deploy_queue: SocketToOrchestratorQueue;
+
+export default function init_services() {
+    try {
+        redis_pubsub = new RedisPubSub();
+        wsserver = new WebSocketServer(redis_pubsub);
+        socket_orchestrator_queue = new SocketToOrchestratorQueue('socket-to-orchestrator');
+        cre_deploy_queue = new SocketToOrchestratorQueue('cre-deploy');
+    } catch (error) {
+        console.error('Error initializing services:', error);
+        throw error;
+    }
+}
