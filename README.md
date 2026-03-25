@@ -75,10 +75,10 @@ cp .env.example .env
 # Edit .env with your Nosana endpoint details
 
 # Install dependencies
-pnpm install
+bun i -g @elizaos/cli
 
 # Start your agent in development mode
-pnpm dev
+elizaos dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to see the ElizaOS built-in client.
@@ -121,7 +121,7 @@ MODEL_NAME=Qwen3.5-27B-AWQ-4bit
 ### Option B: Local Development with Ollama
 
 ```bash
-ollama pull qwen3.5:27b
+ollama pull qwen3.5:27b # or a smaller one for your system
 ollama serve
 ```
 
@@ -335,7 +335,7 @@ Once your job is running on Nosana:
 
 **Need help?**
 - Join the [Nosana Discord](https://nosana.com/discord) for support
-- Check the [Nosana documentation](https://docs.nosana.io)
+- Check the [Nosana documentation](https://learn.nosana.io)
 - Review the [Nosana CLI docs](https://github.com/nosana-ci/nosana-cli)
 
 ---
