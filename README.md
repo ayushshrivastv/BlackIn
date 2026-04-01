@@ -133,6 +133,24 @@ MODEL_NAME=qwen3.5:27b
 
 ---
 
+## Configure Your Embedding Model
+
+Nosana provides a hosted **Qwen3-Embedding-0.6B** endpoint for embeddings (used for RAG, semantic search, and memory). Update your `.env`:
+
+```env
+OPENAI_EMBEDDING_URL=https://4yiccatpyxx773jtewo5ccwhw1s2hezq5pehndb6fcfq.node.k8s.prd.nos.ci/v1
+OPENAI_EMBEDDING_API_KEY=nosana
+OPENAI_EMBEDDING_MODEL=Qwen3-Embedding-0.6B
+OPENAI_EMBEDDING_DIMENSIONS=1024
+```
+
+**Model Details:**
+- **Model ID:** `Qwen3-Embedding-0.6B`
+- **Dimensions:** 1024
+- **Provider:** Nosana decentralized inference
+
+---
+
 ## Customize Your Agent
 
 ### 1. Define your agent's character
