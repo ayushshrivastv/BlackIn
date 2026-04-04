@@ -1,0 +1,106 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: lighthouse-postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: lighthouse_db
+    ports:
+      - "5435:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d lighthouse_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: lighthouse-redis
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: server
+    command: sh -c "pnpm --filter @lighthouse/database db:push && pnpm --filter server start"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://user:password@postgres:5432/lighthouse_db?schema=public
+      SERVER_REDIS_URL: redis://redis:6379
+      SOCKET_REDIS_URL: redis://redis:6379
+    env_file:
+      - .env
+    ports:
+      - "8787:8787"
+
+  socket:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: socket
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql://user:password@postgres:5432/lighthouse_db?schema=public
+      SOCKET_REDIS_URL: redis://redis:6379
+    env_file:
+      - .env
+    ports:
+      - "8282:8282"
+
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: web
+      args:
+        NEXT_PUBLIC_BACKEND_URL: ${NEXT_PUBLIC_BACKEND_URL:-http://localhost:8787}
+        NEXT_PUBLIC_SOCKET_URL: ${NEXT_PUBLIC_SOCKET_URL:-ws://localhost:8282}
+        INTERNAL_BACKEND_URL: ${INTERNAL_BACKEND_URL:-http://server:8787}
+        NEXT_PUBLIC_DEV_ACCESS_MODE: ${NEXT_PUBLIC_DEV_ACCESS_MODE:-true}
+        NEXT_PUBLIC_SKIP_AUTH: ${NEXT_PUBLIC_SKIP_AUTH:-}
+        NEXT_PUBLIC_SKIP_TEMPLATES_FETCH: ${NEXT_PUBLIC_SKIP_TEMPLATES_FETCH:-}
+        NEXT_PUBLIC_DEPLOY_PLACEHOLDER_MODE: ${NEXT_PUBLIC_DEPLOY_PLACEHOLDER_MODE:-true}
+        NEXT_PUBLIC_CHAIN_BASE_ENABLED: ${NEXT_PUBLIC_CHAIN_BASE_ENABLED:-true}
+        NEXT_PUBLIC_BASE_SEPOLIA_RPC_URL: ${NEXT_PUBLIC_BASE_SEPOLIA_RPC_URL:-https://sepolia.base.org}
+        NEXT_PUBLIC_BASE_MAINNET_RPC_URL: ${NEXT_PUBLIC_BASE_MAINNET_RPC_URL:-https://mainnet.base.org}
+        NEXT_PUBLIC_ONCHAINKIT_API_KEY: ${NEXT_PUBLIC_ONCHAINKIT_API_KEY:-}
+        NEXT_PUBLIC_DISABLE_PRIVY: ${NEXT_PUBLIC_DISABLE_PRIVY:-false}
+        NEXT_PUBLIC_PRIVY_APP_ID: ${NEXT_PUBLIC_PRIVY_APP_ID:-}
+        NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID: ${NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID:-}
+        NEXT_PUBLIC_RAZORPAY_KEY_ID: ${NEXT_PUBLIC_RAZORPAY_KEY_ID:-}
+        NEXT_PUBLIC_ENABLE_CAPTCHA: ${NEXT_PUBLIC_ENABLE_CAPTCHA:-false}
+        NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${NEXT_PUBLIC_TURNSTILE_SITE_KEY:-}
+    depends_on:
+      server:
+        condition: service_started
+      socket:
+        condition: service_started
+    environment:
+      NEXT_PUBLIC_BACKEND_URL: ${NEXT_PUBLIC_BACKEND_URL:-http://localhost:8787}
+      NEXT_PUBLIC_SOCKET_URL: ${NEXT_PUBLIC_SOCKET_URL:-ws://localhost:8282}
+      INTERNAL_BACKEND_URL: ${INTERNAL_BACKEND_URL:-http://server:8787}
+    env_file:
+      - .env
+    ports:
+      - "3000:3000"
+
+volumes:
+  postgres_data:
