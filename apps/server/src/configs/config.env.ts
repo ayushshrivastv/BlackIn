@@ -8,7 +8,7 @@ import path from 'path';
 import z from 'zod';
 
 dotenv.config({
-    path: path.resolve(__dirname, '../../../.env'),
+    path: path.resolve(__dirname, '../../../../.env'),
 });
 
 const envScehma = z.object({
