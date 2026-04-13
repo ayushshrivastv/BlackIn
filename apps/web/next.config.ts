@@ -21,6 +21,9 @@ dotenv.config({ path: envPath });
 
 const nextConfig: NextConfig = {
     reactStrictMode: false,
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
     images: {
         remotePatterns: [
             {

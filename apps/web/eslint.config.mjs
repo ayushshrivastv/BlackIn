@@ -42,6 +42,9 @@ export default [
             react: {
                 version: 'detect',
             },
+            next: {
+                rootDir: __dirname,
+            },
         },
         rules: {
             ...reactPlugin.configs.recommended.rules,
