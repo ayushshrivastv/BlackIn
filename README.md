@@ -393,7 +393,7 @@ Submit your project via the official submission page: **[superteam.fun/earn/list
   - [ ] [nosana-ci/nosana-cli](https://github.com/nosana-ci/nosana-cli)
 - [ ] **Make a social media post** about your project on your platform of choice (X/Twitter, LinkedIn, Bluesky, Instagram, or other)
 - [ ] **Provide your GitHub fork link** (public repository)
-- [ ] **Provide your Nosana deployment URL** (running agent)
+- [ ] **Provide your Nosana deployment URL, doesn't need to be running** 
 - [ ] **Write a description** of your agent and what it does (≤300 words)
 - [ ] **Record a video demo** (<1 minute) showing your agent and frontend in action
 
