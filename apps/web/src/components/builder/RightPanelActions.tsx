@@ -443,15 +443,6 @@ function collectSolanaSourcesRecursive(nodes: FileNode[], output: Map<string, st
     }
 }
 
-function createPseudoHex(length: number) {
-    const chars = '0123456789abcdef';
-    let result = '0x';
-    for (let i = 0; i < length; i += 1) {
-        result += chars[Math.floor(Math.random() * chars.length)];
-    }
-    return result;
-}
-
 function createPseudoBase58(length: number) {
     const chars = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
     let result = '';
