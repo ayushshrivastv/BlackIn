@@ -1,6 +1,11 @@
 # Nosana x ElizaOS Agent Challenge
 
-![ElizaOS](./assets/NosanaXEliza.jpg)
+<img width="300" height="300" alt="Screenshot 2026-04-14 at 2 15 53 AM" src="https://github.com/user-attachments/assets/c51366e7-9027-449c-b1aa-e525449ee3e7" />
+
+<img width="700" height="700" alt="Screenshot 2026-04-14 at 2 15 53 AM" src="https://github.com/user-attachments/assets/bcd305a7-1ff2-42f1-ad60-9affbcba7e29" />
+
+<img width="700" height="700" alt="Screenshot 2026-04-14 at 2 16 13 AM" src="https://github.com/user-attachments/assets/01b763a9-2d40-4de1-9660-e27b434fb457" />
+
 
 Build your own **personal AI agent** using [ElizaOS](https://elizaos.com) and deploy it on the [Nosana](https://nosana.com) decentralized compute network. Win a share of **$3,000 USDC** in prizes.
 
