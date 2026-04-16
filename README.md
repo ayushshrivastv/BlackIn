@@ -10,10 +10,6 @@ Watch Product Demo :https://www.youtube.com/watch?v=eVPGylGh7K4
 
 <img width="300" height="300" alt="Screenshot 2026-04-14 at 2 15 53 AM" src="https://github.com/user-attachments/assets/c51366e7-9027-449c-b1aa-e525449ee3e7" />
 
-<img width="700" height="700" alt="Screenshot 2026-04-14 at 2 15 53 AM" src="https://github.com/user-attachments/assets/bcd305a7-1ff2-42f1-ad60-9affbcba7e29" />
-
-<img width="700" height="700" alt="Screenshot 2026-04-14 at 2 16 13 AM" src="https://github.com/user-attachments/assets/01b763a9-2d40-4de1-9660-e27b434fb457" />
-
 ---
 
 ## Overview
@@ -130,8 +126,6 @@ This is the quickest way to boot the entire product with the same service bounda
 
 ---
 
----
-
 ## Monorepo Structure
 
 ```text
@@ -222,13 +216,10 @@ BlackIn is trying to reduce the biggest friction in contract development:
 
 By combining AI generation, a real editing surface, deployment-aware infrastructure, and decentralised compute, BlackIn pushes toward a smoother path from idea to a deployed Solana product.
 
----
 
 ## Demo
 
 - Product demo: https://www.youtube.com/watch?v=eVPGylGh7K4
-
----
 
 ## License
 
