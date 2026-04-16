@@ -8,531 +8,228 @@ The experience is simple. You type a prompt, the agent processes it, and you get
 
 Watch Product Demo :https://www.youtube.com/watch?v=eVPGylGh7K4
 
-<img width="300" height="300" alt="Screenshot 2026-04-14 at 2 15 53 AM" src="https://github.com/user-attachments/assets/c51366e7-9027-449c-b1aa-e525449ee3e7" />
+<img width="300" height="300" alt="Screenshot 2026-04-14 at 2 15 53 AM" src="https://github.com/user-attachments/assets/c51366e7-9027-449c-b1aa-e525449ee3e7" />
 
-<img width="700" height="700" alt="Screenshot 2026-04-14 at 2 15 53 AM" src="https://github.com/user-attachments/assets/bcd305a7-1ff2-42f1-ad60-9affbcba7e29" />
+<img width="700" height="700" alt="Screenshot 2026-04-14 at 2 15 53 AM" src="https://github.com/user-attachments/assets/bcd305a7-1ff2-42f1-ad60-9affbcba7e29" />
 
-<img width="700" height="700" alt="Screenshot 2026-04-14 at 2 16 13 AM" src="https://github.com/user-attachments/assets/01b763a9-2d40-4de1-9660-e27b434fb457" />
-
-
-Build your own **personal AI agent** using [ElizaOS](https://elizaos.com) and deploy it on the [Nosana](https://nosana.com) decentralized compute network. Win a share of **$3,000 USDC** in prizes.
+<img width="700" height="700" alt="Screenshot 2026-04-14 at 2 16 13 AM" src="https://github.com/user-attachments/assets/01b763a9-2d40-4de1-9660-e27b434fb457" />
 
 ---
 
-## The Challenge
+## Overview
 
-Inspired by [OpenClaw](https://openclaw.ai/) — the self-hosted personal AI movement — this challenge is about giving AI back to the individual. Build an agent that runs on **your own infrastructure**, handles **your own tasks**, and keeps **your own data**.
+BlackIn is designed to make smart contract development feel conversational. Instead of starting from an empty editor, developers can describe a contract in plain English and let BlackIn turn that intent into working project structure, generated code, reviewable output, and deployment-ready artifacts.
 
-> **Theme: Personal AI Agents** — Build an AI agent that acts as a personal assistant, automate your life, or solve a real problem for yourself or your community. The use case is entirely up to you.
+BlackIn is focused on Solana smart contract workflows, with template-backed generation paths for common Solana and Anchor-style contract patterns.
 
-**Framework:** [ElizaOS](https://elizaos.com) (latest v2)
-**Compute:** [Nosana](https://nosana.com) decentralized GPU network
-**Model:** Qwen3.5-27B (hosted endpoint provided by Nosana)
 
----
-
-## Prizes — $3,000 USDC Total
-
-| Place | Prize |
-|-------|-------|
-| 🥇 1st | $1,000 USDC |
-| 🥈 2nd | $750 USDC |
-| 🥉 3rd | $450 USDC |
-| 4th | $200 USDC |
-| 5th–10th | $100 USDC each |
-
----
-
-## Schedule
-
-Follow Nosana's Luma for more information: [Nosana Luma](https://luma.com/calendar/cal-RF19mq3EtF4juLc)
-
-![](./assets/image.png)
-
----
-
-## What to Build
-
-There are no strict requirements on use case — build whatever is most useful to you. Some ideas to get started:
-
-- 🗂️ **Personal assistant** — calendar, tasks, email drafting, reminders
-- 🔍 **Research agent** — web search, summarization, knowledge synthesis
-- 📱 **Social media manager** — Twitter/X, Telegram, Discord automation
-- 💰 **DeFi/crypto agent** — portfolio monitoring, on-chain alerts, trading insights
-- 🏠 **Home automation** — smart home control, IoT integration
-- 🛠️ **DevOps helper** — monitor services, automate deployments
-- 🎨 **Content creator** — blog posts, social copy, creative writing
-
-**Tip:** ElizaOS has a rich [plugin ecosystem](https://elizaos.github.io/eliza/docs/core/plugins). Explore existing plugins and templates before building from scratch — you might find 80% of what you need already exists.
-
----
-
-## Getting Started
+## Local Development
 
 ### Prerequisites
 
-- Node.js 23+
-- pnpm (`npm install -g pnpm`)
-- Docker (for deployment)
-- Git
+- Node.js 20 or newer
+- pnpm 9
+- Docker and Docker Compose
 
-### Quick Start
+### 1. Install dependencies
 
 ```bash
-# Fork this repo, then clone your fork
-git clone https://github.com/YOUR-USERNAME/agent-challenge
-cd agent-challenge
+pnpm install
+```
 
-# Copy and configure environment variables
+### 2. Create your local environment file
+
+```bash
 cp .env.example .env
-# Edit .env with your Nosana endpoint details
-
-# Install dependencies
-bun i -g @elizaos/cli
-
-# Start your agent in development mode
-elizaos dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) to see the ElizaOS built-in client.
+At minimum, review:
 
----
+- `OPENAI_API_URL`, `OPENAI_API_KEY`, and `MODEL_NAME`
+- database and Redis URLs
+- auth and wallet configuration if you want the full sign-in flow
+- Solana RPC, wallet, and deployment-related settings if you want live contract workflows
 
-## Claim Your Nosana Builders Credits
-
-All challenge participants get **free compute credits** to deploy and run their agents on Nosana.
-
-**How to claim:**
-
-1. Visit [nosana.com/builders-credits](https://nosana.com/builders-credits)
-2. Sign up or log in with your wallet
-3. Your credits will be added to your account automatically
-4. Use these credits to deploy your ElizaOS agent to the Nosana network
-
-These credits cover the compute costs for running your agent during the challenge period.
-
-> **Note:** Credits are airdropped twice a day. Please be patient if you don't see them immediately after signing up.
-
----
-
-## Configure Your LLM
-
-Nosana provides a hosted **Qwen3.5-27B-AWQ-4bit** endpoint for challenge participants. Update your `.env`:
-
-```env
-OPENAI_API_KEY=nosana
-OPENAI_API_URL=https://6vq2bcqphcansrs9b88ztxfs88oqy7etah2ugudytv2x.node.k8s.prd.nos.ci/v1
-MODEL_NAME=Qwen3.5-27B-AWQ-4bit
-```
-
-**Model Details:**
-- **Model ID:** `Qwen3.5-27B-AWQ-4bit`
-- **Max Context Length:** 60,000 tokens
-- **Provider:** Nosana decentralized inference
-- **Base Model:** cyankiwi/Qwen3.5-27B-AWQ-4bit
-
-### Option B: Local Development with Ollama
+### 3. Start infrastructure services
 
 ```bash
-ollama pull qwen3.5:27b # or a smaller one for your system
-ollama serve
+docker compose up -d postgres redis
 ```
 
-```env
-OPENAI_API_KEY=ollama
-OPENAI_API_URL=http://127.0.0.1:11434/v1
-MODEL_NAME=qwen3.5:27b
-```
+This starts:
 
----
+- PostgreSQL on `localhost:5435`
+- Redis on `localhost:6379`
 
-## Configure Your Embedding Model
-
-Nosana provides a hosted **Qwen3-Embedding-0.6B** endpoint for embeddings (used for RAG, semantic search, and memory). Update your `.env`:
-
-```env
-OPENAI_EMBEDDING_URL=https://4yiccatpyxx773jtewo5ccwhw1s2hezq5pehndb6fcfq.node.k8s.prd.nos.ci/v1
-OPENAI_EMBEDDING_API_KEY=nosana
-OPENAI_EMBEDDING_MODEL=Qwen3-Embedding-0.6B
-OPENAI_EMBEDDING_DIMENSIONS=1024
-```
-
-**Model Details:**
-- **Model ID:** `Qwen3-Embedding-0.6B`
-- **Dimensions:** 1024
-- **Provider:** Nosana decentralized inference
-
----
-
-## Customize Your Agent
-
-### 1. Define your agent's character
-
-Edit `characters/agent.character.json` to define your agent's personality, knowledge, and behavior:
-
-```json
-{
-  "name": "MyAgent",
-  "bio": ["Your agent's backstory and capabilities"],
-  "system": "Your agent's core instructions and behavior",
-  "plugins": ["@elizaos/plugin-bootstrap", "@elizaos/plugin-openai"],
-  "clients": ["direct"]
-}
-```
-
-### 2. Add plugins
-
-Extend your agent by adding plugins to `package.json` and your character file:
-
-| Plugin | Use Case |
-|--------|----------|
-| `@elizaos/plugin-bootstrap` | Required base plugin |
-| `@elizaos/plugin-openai` | OpenAI-compatible LLM (required for Nosana endpoint) |
-| `@elizaos/plugin-web-search` | Web search capability |
-| `@elizaos/plugin-telegram` | Telegram bot client |
-| `@elizaos/plugin-discord` | Discord bot client |
-| `@elizaos/plugin-twitter` | Twitter/X integration |
-| `@elizaos/plugin-browser` | Browser/web automation |
-| `@elizaos/plugin-sql` | Database access |
-
-Install a plugin:
-```bash
-pnpm add @elizaos/plugin-web-search
-```
-
-Add it to your character file:
-```json
-{
-  "plugins": ["@elizaos/plugin-bootstrap", "@elizaos/plugin-openai", "@elizaos/plugin-web-search"]
-}
-```
-
-### 3. Build custom actions (optional)
-
-Add your own custom logic in `src/index.ts`. See the example plugin already included.
-
-### 4. Persistent storage
-
-SQLite is configured by default — sufficient for development and small-scale agents. For a production-grade personal agent, consider:
-
-- A mounted volume on Nosana
-- External database (PostgreSQL, PlanetScale, etc.)
-- Decentralized storage (Arweave, IPFS)
-
----
-
-## Deploy to Nosana
-
-> **Important:** For this challenge, you must deploy your agent to Nosana's decentralized infrastructure. Do **not** use the standard `elizaos deploy` command — that deploys to centralized cloud providers. This challenge is about embracing decentralized compute.
-
-**Why Nosana?**
-- **Decentralized** — Your agent runs on a distributed network of GPU providers, not AWS/GCP/Azure
-- **Cost-effective** — Use your free builders credits (no credit card required)
-- **Permissionless** — No vendor lock-in, full control over your infrastructure
-- **Challenge requirement** — All submissions must be deployed on Nosana
-
-### Prerequisites
-
-Before deploying, ensure you have:
-- [Docker](https://docs.docker.com/get-docker/) installed and running
-- A [Docker Hub](https://hub.docker.com/) account (free)
-- Your [Nosana builders credits](https://nosana.com/builders-credits) claimed
-
-### Step 1: Build and Push Your Docker Image
-
-Your agent needs to be containerized and available on a public registry (Docker Hub) so Nosana nodes can pull and run it.
+### 4. Apply the database schema
 
 ```bash
-# Build your Docker image
-docker build -t yourusername/nosana-eliza-agent:latest .
-
-# Test it locally first (recommended)
-docker run -p 3000:3000 --env-file .env yourusername/nosana-eliza-agent:latest
-
-# Visit http://localhost:3000 to verify it works
-
-# Log in to Docker Hub
-docker login
-
-# Push to Docker Hub (make it public)
-docker push yourusername/nosana-eliza-agent:latest
+pnpm db:push
 ```
 
-> **Tip:** Replace `yourusername` with your actual Docker Hub username. Make sure your repository is **public** so Nosana nodes can pull it.
-
-### Step 2: Configure Your Job Definition
-
-Edit `nos_job_def/nosana_eliza_job_definition.json` and update the Docker image reference:
-
-```json
-{
-  "version": "0.1",
-  "type": "container",
-  "meta": {
-    "trigger": "cli"
-  },
-  "ops": [
-    {
-      "type": "container/run",
-      "id": "eliza-agent",
-      "args": {
-        "image": "yourusername/nosana-eliza-agent:latest",  // <- Change this
-        "ports": ["3000:3000"],
-        "env": {
-          "OPENAI_API_KEY": "nosana",
-          "OPENAI_API_URL": "https://6vq2bcqphcansrs9b88ztxfs88oqy7etah2ugudytv2x.node.k8s.prd.nos.ci/v1",
-          "MODEL_NAME": "Qwen3.5-27B-AWQ-4bit"
-        }
-      }
-    }
-  ]
-}
-```
-
-> **Security Note:** For production deployments, avoid hardcoding sensitive environment variables. Consider using Nosana secrets management or external secret stores.
-
-### Step 3: Deploy via Nosana Dashboard (Easiest)
-
-This is the recommended method for beginners:
-
-1. Visit the [Nosana Dashboard](https://dashboard.nosana.com/deploy)
-2. Connect your Solana wallet (you need this for authentication and using credits)
-3. Click **Expand** to open the job definition editor
-4. Copy and paste the contents of your `nos_job_def/nosana_eliza_job_definition.json` file
-5. Select your preferred compute market:
-   - `nvidia-3090` — High performance (recommended for production)
-   - `nvidia-rtx-4090` — Premium performance
-   - `cpu-only` — Budget option (slower inference)
-6. Click **Deploy**
-7. Wait for a node to pick up your job (usually 30-60 seconds)
-8. Once running, you'll receive a public URL to access your agent
-
-### Step 4: Deploy via Nosana CLI (Advanced)
-
-For developers who prefer the command line or want to automate deployments:
-
-1. First get your API key at [https://deploy.nosana.com/account/](https://deploy.nosana.com/account/)
-2. Edit the [Nosana ElizaOS Job Definition File](./nos_job_def/nosana_eliza_job_definition.json)
-3. Learn more about [Nosana Job Definition Here](https://learn.nosana.com/deployments/jobs/job-definition/intro.html)
-
-```bash
-# Install the Nosana CLI globally
-npm install -g @nosana/cli
-
-# Deploy your agent
-nosana job post \
-  --file ./nos_job_def/nosana_eliza_job_definition.json \
-  --market nvidia-4090 \
-  --timeout 300 \
-  --api <API_KEY>
-
-# Monitor your deployment
-nosana job status <job-id>
-
-# View logs
-nosana job logs <job-id>
-```
-
-**CLI Flags Explained:**
-- `--file` — Path to your job definition JSON
-- `--market` — Which GPU market to use (nvidia-3090, nvidia-rtx-4090, etc.)
-- `--timeout` — Maximum job runtime in minutes
-
-### Step 5: Verify Your Deployment
-
-Once your job is running on Nosana:
-
-1. **Test the endpoint** — Visit the public URL provided by Nosana
-2. **Check agent responsiveness** — Send a test message to your agent
-3. **Monitor logs** — Use the Nosana Dashboard or CLI to view logs
-4. **Verify inference** — Ensure the Qwen3.5-27B model is responding correctly
-
-### Troubleshooting
-
-**Agent not starting?**
-- Check that your Docker image is public on Docker Hub
-- Verify your job definition JSON is valid
-- Ensure environment variables are correctly set
-- Check Nosana dashboard logs for error messages
-
-**Slow response times?**
-- Consider using a higher-tier GPU market (nvidia-rtx-4090)
-- Optimize your ElizaOS configuration
-- Check if the Nosana inference endpoint is reachable
-
-**Out of credits?**
-- Visit [nosana.com/builders-credits](https://nosana.com/builders-credits) to check your balance
-- Credits are airdropped twice daily — be patient if you just signed up
-
-**Need help?**
-- Join the [Nosana Discord](https://nosana.com/discord) for support
-- Check the [Nosana documentation](https://learn.nosana.io)
-- Review the [Nosana CLI docs](https://github.com/nosana-ci/nosana-cli)
-
----
-
-## What You'll Build
-
-Your submission should include:
-- **A working AI agent** built with ElizaOS
-- **A frontend interface** to interact with your agent (web UI, chat interface, dashboard, etc.)
-- **Deployment on Nosana** — your agent must run on Nosana's decentralized infrastructure
-
-**The deeper your Nosana integration, the better your score.** We're looking for projects that fully embrace decentralized infrastructure — not just a minimal deployment, but thoughtful integration into your architecture.
-
-### Examples of Deep Integration (Better Scores):
-- Using Nosana for both training and inference
-- Multi-node deployments across Nosana's network
-- Custom deployment pipelines using Nosana CLI
-- Monitoring and observability integrated with Nosana infrastructure
-- Storage solutions that leverage decentralized networks
-- Creative use of Nosana's compute marketplace
-
----
-
-## Submission
-
-Submit your project via the official submission page: **[superteam.fun/earn/listing/nosana-builders-elizaos-challenge/](https://superteam.fun/earn/listing/nosana-builders-elizaos-challenge/)** before **April 14, 2026**.
-
-**Submission Checklist** — All items are required:
-
-- [ ] **Fork this repository** and build your agent on the `elizaos-challenge` branch
-- [ ] **Build a frontend/UI** for interacting with your agent
-- [ ] **Deploy to Nosana** and get your public deployment URL (agent must run on Nosana infrastructure)
-- [ ] **Star the following repositories:**
-  - [ ] [nosana-ci/agent-challenge](https://github.com/nosana-ci/agent-challenge)
-  - [ ] [nosana-ci/nosana-programs](https://github.com/nosana-ci/nosana-programs)
-  - [ ] [nosana-ci/nosana-kit](https://github.com/nosana-ci/nosana-kit)
-  - [ ] [nosana-ci/nosana-cli](https://github.com/nosana-ci/nosana-cli)
-- [ ] **Make a social media post** about your project on your platform of choice (X/Twitter, LinkedIn, Bluesky, Instagram, or other)
-- [ ] **Provide your GitHub fork link** (public repository)
-- [ ] **Provide your Nosana deployment URL** (running agent)
-- [ ] **Write a description** of your agent and what it does (≤300 words)
-- [ ] **Record a video demo** (<1 minute) showing your agent and frontend in action
-
-> **⚠️ Important:** Submissions that do not meet these requirements will not be considered.
-
-> For complete submission requirements and additional information, visit the [official challenge page](https://superteam.fun/earn/listing/nosana-builders-elizaos-challenge/).
-
----
-
-## Judging Criteria
-
-| Criterion | Weight |
-|-----------|--------|
-| Technical implementation | 25% |
-| Nosana integration depth | 25% |
-| Usefulness & UX | 25% |
-| Creativity & originality | 15% |
-| Documentation | 10% |
-
-**Judging Details:**
-- **Technical implementation (25%)** — Code quality, architecture, and ElizaOS best practices
-- **Nosana integration depth (25%)** — How deeply Nosana is integrated into your deployment and infrastructure
-- **Usefulness & UX (25%)** — Real-world applicability, frontend quality, and user experience
-- **Creativity & originality (15%)** — Innovative use cases and novel approaches
-- **Documentation (10%)** — Code quality, README, setup instructions
-
-**Judges:** DevRel Lead & Ecosystem Specialist, Nosana
-
----
-
-## Project Structure
-
-```
-├── characters/
-│   └── agent.character.json   # Your agent's character definition
-├── src/
-│   └── index.ts               # Custom plugin entry point (optional)
-├── nos_job_def/
-│   └── nosana_eliza_job_definition.json  # Nosana deployment config
-├── Dockerfile                 # Container configuration
-├── .env.example               # Environment variable template
-└── package.json
-```
-
----
-
-## Resources
-
-### ElizaOS
-- [ElizaOS Documentation](https://elizaos.github.io/eliza/docs) — Full framework docs
-- [ElizaOS Plugin Directory](https://elizaos.github.io/eliza/docs/core/plugins) — Browse available plugins
-- [ElizaOS GitHub](https://github.com/elizaos/eliza) — Source code and examples
-- [ElizaOS Discord](https://discord.gg/elizaos) — Community support
-
-### Nosana
-- [Nosana Documentation](https://docs.nosana.io) — Platform guide
-- [Nosana Dashboard](https://dashboard.nosana.com) — Deploy and manage jobs
-- [Nosana CLI](https://github.com/nosana-ci/nosana-cli) — Command-line deployment
-- [Nosana Discord](https://nosana.com/discord) — Support and endpoint URL
-
-### Qwen3.5
-- [Qwen3.5-27B on HuggingFace](https://huggingface.co/Qwen/Qwen3.5-27B)
-
----
-
-## Support & Community
-
-- **Discord** — Join [Nosana Discord](https://nosana.com/discord) for support, the Nosana endpoint URL, and to connect with other builders
-- **Twitter/X** — Follow [@nosana_ai](https://x.com/nosana_ai) and [@elizaos](https://x.com/elizaos) for updates
-- **GitHub** — Open an issue in this repo if you find problems with the template
-
----
-
-## Star History
-
-<a href="https://www.star-history.com/?repos=nosana-ci%2Fagent-challenge&type=date&legend=top-left">
- <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/image?repos=nosana-ci/agent-challenge&type=date&theme=dark&legend=top-left" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/image?repos=nosana-ci/agent-challenge&type=date&legend=top-left" />
-   <img alt="Star History Chart" src="https://api.star-history.com/image?repos=nosana-ci/agent-challenge&type=date&legend=top-left" />
- </picture>
-</a>
-
-## License
-
-This template is open source and available under the [MIT License](./LICENSE).
-
----
-
-**Built with ElizaOS · Deployed on Nosana · Powered by Qwen3.5**
-
-
----
-
-## Lighthouse monorepo (this fork)
-
-This fork extends the challenge template with a PNPM workspace that runs the Lighthouse stack from the repository root.
-
-### Layout
-
-- `apps/web` — Next.js frontend
-- `apps/server` — API server
-- `apps/socket` — WebSocket server
-- `packages/database` — Prisma database package
-- `packages/types` — Shared types
-
-### Local development
-
-1. Install dependencies: `pnpm install`
-2. Copy `.env.example` to `.env` and add your values (see sections above for Nosana endpoints where applicable).
-3. Start Postgres and Redis: `docker compose up -d postgres redis`
-4. Push schema: `pnpm db:push`
-5. Run app: `pnpm dev`
-
-### Useful commands
+### 5. Start the app
 
 ```bash
 pnpm dev
+```
+
+That runs the full stack from the monorepo:
+
+- web app on `http://localhost:3000`
+- API server on `http://localhost:8787`
+- WebSocket server on `ws://localhost:8282`
+
+---
+
+## Running Individual Services
+
+```bash
 pnpm dev:web
 pnpm dev:server
 pnpm dev:socket
+```
+
+Useful when you only want to work on one part of the product at a time.
+
+---
+
+## Useful Commands
+
+```bash
+pnpm dev
 pnpm build
 pnpm lint
 pnpm db:push
+pnpm db:migrate:dev
+pnpm db:migrate:deploy
 pnpm docker:up
 pnpm docker:down
 ```
 
-Full stack with Docker: `docker compose up --build`
+Server-specific test and backend workflow scripts are also available inside `apps/server`.
+
+---
+
+## Docker Workflow
+
+To run the full stack with containers:
+
+```bash
+docker compose up --build
+```
+
+The compose setup includes:
+
+- `postgres`
+- `redis`
+- `server`
+- `socket`
+- `web`
+
+This is the quickest way to boot the entire product with the same service boundaries used by the monorepo.
+
+---
+
+---
+
+## Monorepo Structure
+
+```text
+.
+|-- apps
+|   |-- web         # Next.js frontend
+|   |-- server      # API and generation/deployment orchestration
+|   `-- socket      # WebSocket server
+|-- packages
+|   |-- database    # Prisma schema, migrations, database package
+|   |-- types       # Shared types and schemas
+|   `-- config-*    # Shared TypeScript and ESLint config
+|-- assets          # Project visuals
+|-- docker          # Docker-related assets
+`-- nos_job_def     # Nosana job definitions
+```
+
+---
+
+## Key Features
+
+### Prompt to contract generation
+
+BlackIn takes a plain language request and turns it into structured contract output rather than a single code snippet.
+
+### Real workspace experience
+
+Generated output can be inspected across files, reviewed in the UI, and iterated on through the same session.
+
+### Template support
+
+The backend seeds reusable templates so users can start from common Solana contract patterns instead of beginning from scratch.
+
+### Deployment aware backend
+
+The server keeps track of contract metadata, deployment status, and related records so generation and deployment belong to one workflow.
+
+### GitHub export
+
+Users can connect GitHub and export generated projects directly from BlackIn.
+
+### Real time updates
+
+The WebSocket layer keeps the frontend synced with generation activity and longer-running backend actions.
+
+---
+
+## Environment Notes
+
+The repository includes environment variables for three layers:
+
+- Nosana inference and embedding endpoints
+- BlackIn backend and frontend runtime configuration
+- optional deployment, auth, object storage, and payments integrations
+
+If you only want to run the interface locally, you can start with the default local database and Redis values from `.env.example` and fill in provider keys gradually.
+
+For a fuller experience, configure:
+
+- AI provider keys or Nosana endpoints
+- Privy and WalletConnect credentials
+- Solana wallet and RPC credentials
+- GitHub integration credentials
+- optional object storage and payment settings
+
+---
+
+## Deployment Direction
+
+BlackIn is built around a flow where generation and deployment stay connected. The codebase already includes:
+
+- deployment status tracking
+- Solana-oriented contract templates and workflow metadata
+- Nosana job definition assets
+- containerized services for production-style runtime boundaries
+
+For project submissions or demos, you can run the app locally with Docker or connect it to Nosana-backed inference and deployment flows through the provided environment settings.
+
+---
+
+## Why This Project Matters
+
+BlackIn is trying to reduce the biggest friction in contract development:
+
+- too much setup before the first line of useful code
+- too many disconnected tools between idea, implementation, and deployment
+- too much manual overhead for people who want to prototype quickly
+
+By combining AI generation, a real editing surface, deployment-aware infrastructure, and decentralised compute, BlackIn pushes toward a smoother path from idea to a deployed Solana product.
+
+---
+
+## Demo
+
+- Product demo: https://www.youtube.com/watch?v=eVPGylGh7K4
+
+---
+
+## License
+
+This repository is licensed under the terms of the [LICENSE](./LICENSE) file.
