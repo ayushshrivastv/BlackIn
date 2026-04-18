@@ -248,10 +248,6 @@ BlackIn is trying to reduce the biggest friction in contract development:
 By combining AI generation, a real editing surface, deployment-aware infrastructure, and decentralised compute, BlackIn pushes toward a smoother path from idea to a deployed Solana product.
 
 
-## Demo
-
-- Product demo: https://www.youtube.com/watch?v=eVPGylGh7K4
-
 ## License
 
 This repository is licensed under the terms of the [LICENSE](./LICENSE) file.
