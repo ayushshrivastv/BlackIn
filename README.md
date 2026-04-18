@@ -23,7 +23,8 @@ BlackIn is focused on Solana smart contract workflows, with template-backed gene
 <img width="700" height="700" alt="Screenshot 2026-04-18 at 3 39 35 PM" src="https://github.com/user-attachments/assets/8c293b90-f247-4448-9209-52f27f6f1c53" />
 
 
-<img width="700" height="700" alt="Screenshot 2026-04-18 at 3 38 57 PM" src="https://github.com/user-attachments/assets/540f43c1-3e41-431b-a5ba-73bc051d4296" />
+<img width="700" height="700" alt="Screenshot 2026-04-18 at 3 47 21 PM" src="https://github.com/user-attachments/assets/9f31b3b3-90cc-4fb7-8b32-d348bf6412e7" />
+
 
 ## Local Development
 
