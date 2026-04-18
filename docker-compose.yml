@@ -42,8 +42,6 @@ services:
       DATABASE_URL: postgresql://user:password@postgres:5432/lighthouse_db?schema=public
       SERVER_REDIS_URL: redis://redis:6379
       SOCKET_REDIS_URL: redis://redis:6379
-    env_file:
-      - .env
     ports:
       - "8787:8787"
 
@@ -60,8 +58,6 @@ services:
     environment:
       DATABASE_URL: postgresql://user:password@postgres:5432/lighthouse_db?schema=public
       SOCKET_REDIS_URL: redis://redis:6379
-    env_file:
-      - .env
     ports:
       - "8282:8282"
 
@@ -97,8 +93,6 @@ services:
       NEXT_PUBLIC_BACKEND_URL: ${NEXT_PUBLIC_BACKEND_URL:-http://localhost:8787}
       NEXT_PUBLIC_SOCKET_URL: ${NEXT_PUBLIC_SOCKET_URL:-ws://localhost:8282}
       INTERNAL_BACKEND_URL: ${INTERNAL_BACKEND_URL:-http://server:8787}
-    env_file:
-      - .env
     ports:
       - "3000:3000"
 

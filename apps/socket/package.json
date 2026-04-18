@@ -6,6 +6,7 @@
   "scripts": {
     "build": "npx esbuild ./src/index.ts --bundle --platform=node --outdir=dist --format=cjs --loader:.ts=ts --sourcemap --minify --external:@prisma/client --external:express --external:jsonwebtoken --external:@aws-sdk/client-s3 --external:@aws-sdk/s3-request-presigner --external:bull --external:ioredis --external:ws --external:@google/genai --external:@anthropic-ai/sdk --external:razorpay --external:uuid --external:winston --external:zod",
     "start": "node dist/index.js",
+    "predev": "pnpm --filter @lighthouse/database generate",
     "dev": "tsx watch --clear-screen=false src/index.ts",
     "remove-logs": "npx ts-node src/scripts/remove-logs",
     "lint": "eslint './src/**/*.{ts,js}'",

@@ -16,7 +16,7 @@
     "db:migrate:dev": "turbo run db:migrate:dev",
     "db:push": "turbo run db:push",
     "db:seed": "turbo run db:seed",
-    "dev": "turbo run dev --parallel --filter=web --filter=server --filter=socket",
+    "dev": "pnpm db:push && turbo run dev --parallel --filter=web --filter=server --filter=socket",
     "dev:server": "pnpm --filter server dev",
     "dev:socket": "pnpm --filter socket dev",
     "dev:web": "pnpm --filter web dev",
@@ -25,7 +25,8 @@
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
     "generate": "turbo run generate",
     "lint": "turbo run lint",
-    "remove-logs": "turbo run remove-logs"
+    "remove-logs": "turbo run remove-logs",
+    "verify:clone-ready": "pnpm lint && pnpm build"
   },
   "devDependencies": {
     "prettier": "^3.6.2",

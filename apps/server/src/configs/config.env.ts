@@ -3,13 +3,10 @@
  * © 2026 ayushshrivastv
  */
 
-import dotenv from 'dotenv';
-import path from 'path';
 import z from 'zod';
+import { loadRepoEnv } from '../../../../src/load-repo-env';
 
-dotenv.config({
-    path: path.resolve(__dirname, '../../../../.env'),
-});
+loadRepoEnv(__dirname);
 
 const envScehma = z.object({
     SERVER_NODE_ENV: z.enum(['development', 'production']),

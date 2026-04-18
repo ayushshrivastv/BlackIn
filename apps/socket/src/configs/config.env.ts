@@ -4,12 +4,9 @@
  */
 
 import { z } from 'zod';
-import dotenv from 'dotenv';
-import path from 'path';
+import { loadRepoEnv } from '../../../../src/load-repo-env';
 
-dotenv.config({
-    path: path.resolve(__dirname, '../../../../.env'),
-});
+loadRepoEnv(__dirname);
 
 const envSchema = z.object({
     SERVER_NODE_ENV: z.enum(['development', 'production']).default('development'),

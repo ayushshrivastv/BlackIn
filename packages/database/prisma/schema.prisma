@@ -35,7 +35,7 @@ model Contract {
   title        String
   description  String?
   contractType ContractType
-  chain        Chain        @default(BASE)
+  chain        Chain        @default(SOLANA)
   code         String?
   codeHash     String?
   s3_url       String?
@@ -84,7 +84,7 @@ model Template {
   title            String
   description      String?
   category         String
-  chain            Chain    @default(BASE)
+  chain            Chain    @default(SOLANA)
   tags             String[]
   s3_prefix        String?
   solanaVersion    String?
@@ -106,7 +106,7 @@ model BuildJob {
   id         String   @id @default(cuid())
   contract   Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
   contractId String
-  chain      Chain    @default(BASE)
+  chain      Chain    @default(SOLANA)
 
   jobId   String
   status  BuildStatus
@@ -155,7 +155,7 @@ model Deployment {
   id          String   @id @default(cuid())
   contract    Contract @relation(fields: [contractId], references: [id], onDelete: Cascade)
   contractId  String
-  chain       Chain    @default(BASE)
+  chain       Chain    @default(SOLANA)
   network     String // e.g. base-sepolia / base-mainnet
   deployedAt  DateTime @default(now())
   txSignature String? // optional Solana transaction signature

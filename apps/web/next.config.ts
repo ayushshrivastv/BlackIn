@@ -4,20 +4,14 @@
  */
 
 import type { NextConfig } from 'next';
-import dotenv from 'dotenv';
 import path from 'path';
-import fs from 'fs';
 import { fileURLToPath } from 'url';
+import { loadRepoEnv } from '../../src/load-repo-env';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const envLocalPath = path.resolve(__dirname, '../../.env.local');
-const envPath = fs.existsSync(envLocalPath)
-    ? envLocalPath
-    : path.resolve(__dirname, '../../.env');
-
-dotenv.config({ path: envPath });
+loadRepoEnv(__dirname);
 
 const nextConfig: NextConfig = {
     reactStrictMode: false,

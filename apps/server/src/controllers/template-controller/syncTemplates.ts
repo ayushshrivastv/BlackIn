@@ -37,7 +37,9 @@ export default async function syncTemplate(req: Request, res: Response) {
             body.chain === Chain.SOLANA ||
             (typeof body.chain !== 'string' && (body.solanaVersion || body.anchorVersion))
                 ? Chain.SOLANA
-                : Chain.BASE,
+                : body.chain === Chain.BASE
+                  ? Chain.BASE
+                  : Chain.SOLANA,
         tags: Array.isArray(body.tags) ? body.tags : [],
         s3_prefix: body.s3_prefix,
         solanaVersion: body.solanaVersion,

@@ -27,26 +27,21 @@ BlackIn is focused on Solana smart contract workflows, with template-backed gene
 - pnpm 9
 - Docker and Docker Compose
 
+BlackIn is clone-ready with committed local defaults. A root `.env` file is optional for local overrides, not required for the first build or dev boot.
+
+Env files are resolved in this order:
+
+```text
+.env.local -> .env -> .env.example
+```
+
 ### 1. Install dependencies
 
 ```bash
 pnpm install
 ```
 
-### 2. Create your local environment file
-
-```bash
-cp .env.example .env
-```
-
-At minimum, review:
-
-- `OPENAI_API_URL`, `OPENAI_API_KEY`, and `MODEL_NAME`
-- database and Redis URLs
-- auth and wallet configuration if you want the full sign-in flow
-- Solana RPC, wallet, and deployment-related settings if you want live contract workflows
-
-### 3. Start infrastructure services
+### 2. Start infrastructure services
 
 ```bash
 docker compose up -d postgres redis
@@ -57,23 +52,32 @@ This starts:
 - PostgreSQL on `localhost:5435`
 - Redis on `localhost:6379`
 
-### 4. Apply the database schema
-
-```bash
-pnpm db:push
-```
-
-### 5. Start the app
+### 3. Start the app
 
 ```bash
 pnpm dev
 ```
 
-That runs the full stack from the monorepo:
+The root dev command synchronizes the local Prisma schema and auto-generates the Prisma client before the dependent services start. That runs the full stack from the monorepo:
 
 - web app on `http://localhost:3000`
 - API server on `http://localhost:8787`
 - WebSocket server on `ws://localhost:8282`
+
+### 4. Optional local overrides
+
+If you want to override the committed defaults, create either `.env` or `.env.local`:
+
+```bash
+cp .env.example .env
+```
+
+Useful values to review when moving beyond the default local stack:
+
+- `OPENAI_API_URL`, `OPENAI_API_KEY`, and `MODEL_NAME`
+- database and Redis URLs
+- auth and wallet configuration if you want the full sign-in flow
+- Solana RPC, wallet, and deployment-related settings if you want live contract workflows
 
 ---
 
@@ -95,6 +99,7 @@ Useful when you only want to work on one part of the product at a time.
 pnpm dev
 pnpm build
 pnpm lint
+pnpm verify:clone-ready
 pnpm db:push
 pnpm db:migrate:dev
 pnpm db:migrate:deploy
@@ -108,11 +113,13 @@ Server-specific test and backend workflow scripts are also available inside `app
 
 ## Docker Workflow
 
-To run the full stack with containers:
+To run the full stack with containers from a fresh clone:
 
 ```bash
 docker compose up --build
 ```
+
+This path no longer requires a manually created `.env` file. The containers use the same fallback order as local development, with `.env.example` as the committed baseline and `.env` or `.env.local` available for overrides.
 
 The compose setup includes:
 
@@ -123,6 +130,24 @@ The compose setup includes:
 - `web`
 
 This is the quickest way to boot the entire product with the same service boundaries used by the monorepo.
+
+---
+
+## Clone-Readiness Check
+
+To verify the repo works from committed defaults:
+
+```bash
+pnpm install
+pnpm verify:clone-ready
+```
+
+For a full local smoke test:
+
+```bash
+docker compose up -d postgres redis
+pnpm dev
+```
 
 ---
 

@@ -12,7 +12,7 @@ export default async function getAllTemplates(req: Request, res: Response) {
     try {
         const templates = await prisma.template.findMany({
             where: {
-                chain: Chain.BASE,
+                chain: Chain.SOLANA,
             },
             select: {
                 id: true,

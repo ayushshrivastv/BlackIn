@@ -512,21 +512,6 @@ export default class Generator {
                         ? 'wager_matchmaking'
                         : null;
 
-            const stakeMode =
-                /\b(no wager|without wager|no stakes|without stakes|just play|no money|without money)\b/.test(
-                    lower,
-                )
-                    ? 'no_wager'
-                    : /\b(tournament|prize pool|entry fee)\b/.test(lower)
-                      ? 'tournament_pool'
-                      : /\b(wager|stake|bet|deposit|escrow|buy in|buy-in)\b/.test(lower)
-                        ? 'fixed_stake'
-                        : /\b(result only|final outcome|settle final outcome|agreed result)\b/.test(
-                                lower,
-                            )
-                          ? 'offchain_result_only'
-                          : null;
-
             if (!scope) {
                 return this.buildClarificationPayload(
                     'I need one contract detail before I write this',
@@ -570,14 +555,6 @@ export default class Generator {
               ? 'escrow'
               : /\b(custom|marketplace|auction|governance|vault|staking|vesting)\b/.test(lower)
                 ? 'custom'
-                : null;
-
-        const mainBehavior = /\b(deposit|release|refund|withdraw)\b/.test(lower)
-            ? 'deposit_release_refund'
-            : /\b(mint|burn|transfer|supply)\b/.test(lower)
-              ? 'mint_burn_transfer'
-              : /\b(rule|permission|governance|marketplace|auction|staking|vesting)\b/.test(lower)
-                ? 'rules_and_permissions'
                 : null;
 
         const genericOnly =
