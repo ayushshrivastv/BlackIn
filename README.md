@@ -6,8 +6,6 @@ BlackIn is a smart contract writing assistant built for developers who want to m
 
 The experience is simple. You type a prompt, the agent processes it, and you get clean usable contract code back. No figuring out the structure line by line, no switching between tools. Once the contract is generated you can review it and deploy directly from the frontend in the same place. Prompt, contract, deployment, all in one flow, written in a secure and trusted environment from the start.
 
-Nosana: https://deploy.nosana.com/deployments/5vakntwGyQRfnKzs2zBJqebHLjzR5Af6mGQfA5hdEpp7
-
 Nosana Deployment: https://2wcyuvhxu41fz9wgvjpwg2hfvxzasbtozqyi8mj17mtc.node.k8s.prd.nos.ci/
 
 <img width="300" height="300" alt="Screenshot 2026-04-14 at 2 15 53 AM" src="https://github.com/user-attachments/assets/c51366e7-9027-449c-b1aa-e525449ee3e7" />
